@@ -7,6 +7,9 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import './assets/style/App.scss';
 import AppTopbar from './AppTopbar'
+import AppRouter from './AppRouter'
+import 'primeflex/primeflex.css';
+import 'prismjs/themes/prism-coy.css';
 import { I18nProvider, LOCALES } from './i18n';
 
 function App() {
@@ -16,9 +19,10 @@ function App() {
     <I18nProvider>
     <div className='App'>
  
-      <AppTopbar />
-      <div className='p-main-layout'>
-      </div>
+        <AppTopbar />
+        <div className='p-main-layout'>
+            <AppRouter />
+        </div>
       </div>
     </I18nProvider>
 
