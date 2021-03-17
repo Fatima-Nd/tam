@@ -1,0 +1,81 @@
+body{
+    direction: rtl;
+    text-align: right;
+}
+.topbar-menu-right{
+    float: left;
+}
+.topbar-menu-left{
+    float: right;
+}
+
+.layout-topbar .topbar-menu > li{
+    float: right;
+}
+.layout-topbar .topbar-menu > li.topbar-submenu > ul > li{
+    float: right;
+}
+.p-datatable .p-paginator-bottom{
+    direction: ltr;
+}
+.topbar-menu-right .globe{
+    float: right;
+}
+.user-btn .left{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 25px;
+}
+.user-btn .right{
+    display: inline-block;
+    vertical-align: middle;
+}
+.p-sortable-column{
+    direction: ltr;
+    text-align: right!important;
+}
+.p-column-filter {
+    width: 100%;
+    direction: ltr;
+    text-align: right;
+}
+.p-datatable .p-datatable-thead > tr > th{
+    text-align:right;
+}
+.p-datatable .p-datatable-tbody > tr > td{
+    text-align:right;
+}
+.p-button .p-button-icon-left{
+    float: right;
+    margin-left:0.5rem;
+    margin-right:0;
+}
+.pi-blue{
+    color:#2476C7;
+}
+.pi-red{
+    color:#B90E1E;
+}
+.titles {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+.p-inputtext {
+    max-width: 100%;
+  
+}
+.pi-fontsize-column{
+    font-size: 16px;
+}
+.react-autosuggest__input {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 5px 5px;
+    font-family: Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}
