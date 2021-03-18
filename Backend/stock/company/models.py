@@ -4,7 +4,7 @@ class CommonInfoAddress(models.Model):
     phone1 = models.CharField(max_length=255)
     phone2 = models.CharField(max_length=255, blank=True, null=True)
     fax = models.CharField(max_length=255, blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
+    email = models.EmailField()
     country = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
@@ -20,10 +20,10 @@ class Company(CommonInfoAddress):
     start_date= models.DateField()
     end_date = models.DateField()
     vat_amount = models.FloatField(null = True, blank= True)
-    vat_date = models.DateField(null = True, blank= True)
+    vat_date = models.DateField(null = True)
     mof =  models.CharField(max_length = 100)
     commercial_register = models.IntegerField()
-    image= models.ImageField()
+    image= models.ImageField(null = True, blank= True)
 
     def __str__(self):
         return self.name

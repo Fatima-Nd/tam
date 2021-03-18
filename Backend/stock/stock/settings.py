@@ -46,17 +46,23 @@ INSTALLED_APPS = [
     'settings',
     'company',
     'authentication',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3001',
+    'http://localhost:8000',
+)
 
 ROOT_URLCONF = 'stock.urls'
 
@@ -86,7 +92,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'stock',
-        'USER': 'tamouz',
+        'USER': 'postgres',
         'PASSWORD': 'cisco',
         'HOST': 'localhost',
         'PORT': '5432',

@@ -149,31 +149,7 @@ export function AppTopbar(props) {
                             <li><NavLink  to="/accounting/transactions/TableGeneralVoucher/" activeStyle={{}}><span>{translate('General Voucher')}</span></NavLink></li> 
                         </ul>
                     </li>
-                    <li role="none" className={window.location.href.indexOf("cms") > -1 ? "topbar-submenu active" : "topbar-submenu"}>
-                        {/* eslint-disable */}
-                        <NavLink to='/cms/dashboard' onClick={CmsHeader} >{translate('CMS')}</NavLink>
-                        {/* eslint-enable */}
-                        <ul role="menu" aria-label="Resources" className={cms ? "submenu active" : "submenu"}>
-                            <li><NavLink to="/cms/dashboard" role="menuitem"><span>{translate('Dashboard')}</span></NavLink></li>
-                            <li><NavLink to="/cms/contract" role="menuitem"><span>{translate('Contract')}</span></NavLink></li>
-                            <li><NavLink to="/cms/counterparty" role="menuitem" ><span>{translate('Counterparty')}</span></NavLink></li>
-                            <li><NavLink to="/cms/vendor" role="menuitem"><span>{translate('Vendor')}</span></NavLink></li>
-                            <li><NavLink to="/cms/item" role="menuitem"><span>{translate('Item')}</span></NavLink></li>
-                        </ul>
-                    </li>
-
-                    <li role="none" className={window.location.href.indexOf("crm") > -1 ? "topbar-submenu active" : "topbar-submenu"}>
-                        {/* eslint-disable */}
-                        <NavLink to='/crm/dashboard' onClick={CrmHeader} >{translate('CRM')}</NavLink>
-                        {/* eslint-enable */}
-                        <ul role="menu" aria-label="Resources" className={crm ? "submenu active " : "submenu"}>
-                            <li><NavLink to="/crm/dashboard" role="menuitem" activeStyle={{}}><span>Dashboard</span></NavLink></li>
-                            <li><NavLink to="/crm/lead" role="menuitem" activeStyle={{}}><span>Leads</span></NavLink></li>
-                            <li><NavLink to="/crm/deal" role="menuitem" activeStyle={{}}><span>Deals</span></NavLink></li>
-                            <li><NavLink to="/crm/contact/listcontact" role="menuitem" activeStyle={{}}><span>Contacts</span></NavLink></li>
-                            <li><NavLink to="/crm/accounts/listaccount" role="menuitem" activeStyle={{}}><span>Accounts</span></NavLink></li>
-                        </ul>
-                    </li>
+   
                     <li role="none" className={window.location.href.indexOf("stock") > -1 ? "topbar-submenu active" : "topbar-submenu"}>
                         <NavLink to='/stock/dashboard' onClick={StockHeader} >{translate('Stock Control')}</NavLink>
                         <ul role="menu" aria-label="Resources" className={stock ? "submenu active " : "submenu"}>
