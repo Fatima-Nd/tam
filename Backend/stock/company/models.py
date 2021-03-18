@@ -20,7 +20,7 @@ class Company(CommonInfoAddress):
     start_date= models.DateField()
     end_date = models.DateField()
     vat_amount = models.FloatField(null = True, blank= True)
-    vat_date = models.DateField(null = True)
+    vat_date = models.DateField(null = True, blank= True)
     mof =  models.CharField(max_length = 100)
     commercial_register = models.IntegerField()
     image= models.ImageField(null = True, blank= True)
@@ -30,6 +30,7 @@ class Company(CommonInfoAddress):
 
 class Branch(CommonInfoAddress):
     name = models.CharField(max_length = 255)
+    number = models.IntegerField()
     start_date= models.DateField()
     end_date = models.DateField()
     company = models.ForeignKey(Company, on_delete=models.PROTECT)

@@ -14,6 +14,8 @@ def CompanyList(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
+        if request.data['vat_date'] == None:
+            request.data['vat_date'] = None
         serializer = CompanySerializer(data=request.data)
         if serializer.is_valid():
             saved = serializer.save()

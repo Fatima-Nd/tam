@@ -122,7 +122,7 @@ export function ListCompany(props) {
                 <Column field="end_date" header={translate("End Date")} sortable filter filterPlaceholder="Search by enddate" />
                 <Column field="vat" header={translate("Vat")}  sortable filter filterPlaceholder="Search by vat" />
                 <Column field="email" header={translate("Email")} sortable filter filterPlaceholder="Search by email" />
-                <Column field="phone" header={translate("Phone")} sortable filter filterPlaceholder="Search by phone" />
+                <Column field="phone1" header={translate("Phone")} sortable filter filterPlaceholder="Search by phone" />
                 <Column  header={translate("Actions")} body={actionBodyTemplate} />
                         
             </DataTable>
@@ -141,7 +141,7 @@ export function ListCompany(props) {
                         <Column field="end_date" header={translate("End Date")} sortable filter filterPlaceholder="Search by enddate" />
                         <Column field="vat" header={translate("Vat")} body={vatBodyTemplate} sortable filter filterPlaceholder="Search by vat" />
                         <Column field="email" header={translate("Email")} sortable filter filterPlaceholder="Search by email" />
-                        <Column field="phone" header={translate("Phone")} sortable filter filterPlaceholder="Search by phone" />
+                        <Column field="phone1" header={translate("Phone")} sortable filter filterPlaceholder="Search by phone" />
                         <Column  header={translate("Actions")} body={actionBodyTemplate} />
                         
                     </DataTable>

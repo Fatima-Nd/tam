@@ -61,7 +61,7 @@ export function EditCompany(props) {
     
     const editComapny = e => {
         e.preventDefault();
-        axios.post(APIURL + '/company/listcompany/',  {name,currency,start_date:moment(start_date).format('YYYY-MM-DD'),end_date:moment(end_date).format('YYYY-MM-DD'),vat,vat_amount,vat_date: vat_date ? moment(vat_date).format('YYYY-MM-DD') : null,mof,commercial_register,phone1,phone2,email,fax,website,country,address,city}).then(res => {
+        axios.put(APIURL + '/company/updatecompany/' + props.location.state.id + '/' , {name,currency,start_date:moment(start_date).format('YYYY-MM-DD'),end_date:moment(end_date).format('YYYY-MM-DD'),vat,vat_amount,vat_date: vat_date ? moment(vat_date).format('YYYY-MM-DD') : null,mof,commercial_register,phone1,phone2,email,fax,website,country,address,city}).then(res => {
            props.history.push({pathname: '/company/listcompany', add : {success : 'saved'} })
             console.log(res.data)
     })

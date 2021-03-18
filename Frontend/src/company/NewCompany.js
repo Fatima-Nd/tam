@@ -16,12 +16,18 @@ import Countries from '../common/components/Countries'
 import APIURL from '../ApiConfig'
 import moment from 'moment';
 export function NewCompany(props) {
+  
     const[submitted, setsubmitted] = useState(false)
     const [name,setname] = useState(null)
     const[currency,setcurrency]= useState(null)
-    const[vat,setvat]= useState(null)
+    const[vat,setvat]= useState(false)
     const[start_date,setstart_date]= useState(new Date())
-    const[end_date,setend_date] = useState(moment(moment(start_date).endOf('year')).format("DD/MM/YYYY"))
+
+    let a = moment(new Date).endOf('year')
+    const[end_date,setend_date] = useState(moment(a).format('DD/MM/YYYY'))
+
+    const[fakedate,setfakedate] = useState(moment(a).format('YYYY-MM-DD'))
+
     const[vat_amount,setvat_amount] = useState(null)
     const[vat_date,setvat_date] = useState(null)
     const[mof,setmof] =  useState(null)
@@ -36,7 +42,6 @@ export function NewCompany(props) {
     const[address,setaddress] = useState(null)
     const[website,setwebsite] = useState(null)
 
-console.log(end_date)
     const sub = () => {
         setsubmitted(true)
     }
@@ -60,11 +65,11 @@ console.log(end_date)
     
     const createComapny = e => {
         e.preventDefault();
-        axios.post(APIURL + '/company/listcompany/',  {name,currency,start_date:moment(start_date).format('YYYY-MM-DD'),end_date:moment(end_date).format('YYYY-MM-DD'),vat,vat_amount,vat_date: vat_date ? moment(vat_date).format('YYYY-MM-DD') : null,mof,commercial_register,phone1,phone2,email,fax,website,country,address,city}).then(res => {
+        axios.post(APIURL + '/company/listcompany/',  {name,currency,start_date:moment(start_date).format('YYYY-MM-DD'),end_date:fakedate,vat,vat_amount : !vat_amount ? null :vat_amount ,vat_date: vat_date ? moment(vat_date).format('YYYY-MM-DD') : null,mof,commercial_register,phone1,phone2,email,fax,website,country,address,city}).then(res => {
            props.history.push({pathname: '/company/listcompany', add : {success : 'saved'} })
             console.log(res.data)
     })
-        console.log({name,currency,start_date:moment(start_date).format('YYYY-MM-DD'),end_date:moment(end_date).format('YYYY-MM-DD'),vat,vat_amount,vat_date:vat_date ? moment(vat_date).format('YYYY-MM-DD') : null,mof,commercial_register,phone1,phone2,email,fax,website,country,address,city})
+        console.log({name,currency,start_date:moment(start_date).format('YYYY-MM-DD'),end_date: fakedate,vat,vat_amount,vat_date:vat_date ? moment(vat_date).format('YYYY-MM-DD') : null,mof,commercial_register,phone1,phone2,email,fax,website,country,address,city})
     }
     const leftToolbarTemplate1 = () => {
         return <h6>{translate("Company Info")}</h6>
@@ -75,7 +80,24 @@ console.log(end_date)
     const leftToolbarTemplate3 = () => {
         return <h6>{translate("Address Info")}</h6>
     }
-    
+    const ChangeVat = (e) => {
+        setvat(e.checked)
+        if (e.checked === false){
+            setvat_amount('')
+            setvat_date(null)
+        }
+    }
+    const StartDateChange = (e) =>{
+        setstart_date(e.value)
+        let a = moment(e.value).endOf('year')
+        setend_date(moment(a).format('DD/MM/YYYY'))
+        setfakedate(moment(a).format('YYYY-MM-DD'))
+    }
+    const EndDateChange = (e) =>{
+        setend_date(e.value)
+        setfakedate(moment(e.value).format('YYYY-MM-DD'))
+    }
+
     return (
          <Card className='center-elements' >
              
@@ -111,7 +133,7 @@ console.log(end_date)
 
                     <div className="p-field p-col">
                         <strong>{translate('Commercial Register')}<span className='color-star'>*</span></strong>
-                        <InputText keyfillter="int" value={commercial_register} onChange={(e) =>setcommercial_register(e.target.value)} required className={classNames({ 'p-invalid': submitted && !commercial_register })} />
+                        <InputText keyfilter="int" value={commercial_register} onChange={(e) =>setcommercial_register(e.target.value)} required className={classNames({ 'p-invalid': submitted && !commercial_register })} />
                         {submitted && !commercial_register && <small className="p-invalid">{translate('CommercialRegister is required')}</small>}
                         
                     </div>
@@ -128,14 +150,14 @@ console.log(end_date)
                     </div>
                     <div className="p-field p-col">
                         <strong>{translate('Start Date')}<span className='color-star'>*</span></strong>
-                        <Calendar value={start_date} onChange={(e) => setstart_date(e.value)} dateFormat="dd/mm/yy"  monthNavigator yearNavigator yearRange="2010:2030" required className={classNames({ 'p-invalid': submitted && !start_date })} />
+                        <Calendar value={start_date} onChange={StartDateChange} dateFormat="dd/mm/yy"  monthNavigator yearNavigator yearRange="2010:2030" required className={classNames({ 'p-invalid': submitted && !start_date })} />
                         {submitted && !start_date && <small className="p-invalid">{translate('StartDate is required')}</small>}
                         
                     </div>
 
                     <div className="p-field p-col">
                         <strong>{translate('End Date')}<span className='color-star'>*</span></strong>
-                        <Calendar placeholder={end_date} dateFormat="dd/mm/yy" value={end_date} onChange={(e) =>setend_date(e.value)} required className={classNames({ 'p-invalid': submitted && !end_date })} />
+                        <Calendar placeholder={end_date} value={end_date} dateFormat="dd/mm/yy" onChange={EndDateChange} required className={classNames({ 'p-invalid': submitted && !end_date })} />
                         {submitted && !end_date && <small className="p-invalid">{translate('EndDate is required')}</small>}
                         
                     </div>
@@ -146,23 +168,24 @@ console.log(end_date)
                 <div className="p-field p-col-1"></div>
                     <div className="p-field p-col">
                     <br />
-                        <strong className='mr-2'>{translate('Vat')}</strong>
-                        <Checkbox checked={vat} onChange={e=> setvat(e.checked)}  />
+                        <strong className='mr-2'>{translate('VAT')}</strong>
+                        <Checkbox checked={vat} onChange={ChangeVat}  />
                         
                     </div>
                     <div className="p-field p-col">
-                        <strong>{translate('Start Date of Vat')}</strong> {vat ? (<span className='color-star'>*</span>): '' }
-                        <Calendar value={vat_date}  disabled={vat ? false : true} onChange={(e) => setvat_date(e.value)} monthNavigator yearNavigator yearRange="2010:2030" required={vat? true : false} className={vat ? classNames({ 'p-invalid': submitted && !vat_date }) : ''} />
+                        <strong>{translate('Start Date of VAT')}</strong> {vat ? (<span className='color-star'>*</span>): '' }
+                        <Calendar value={vat_date}  disabled={vat ? false : true} onChange={(e) => setvat_date(e.value)} monthNavigator yearNavigator yearRange="2010:2030" dateFormat="dd/mm/yy" required={vat? true : false} className={vat ? classNames({ 'p-invalid': submitted && !vat_date }) : ''} />
                         {submitted && !vat_date && vat && <small className="p-invalid">{translate('Date is required')}</small>}
                         
                     </div>
+                    <div className="p-field p-col"></div>
 
-                    <div className="p-field p-col">
+                 {/*    <div className="p-field p-col">
                         <strong>{translate('Amount in %')}</strong>{ vat ? <span className='color-star'>*</span> : ''}
-                        <InputText  value={vat_amount} disabled={vat ? false : true} onChange={(e) =>setvat_amount(e.value)} required={vat ? true : false} className={vat ? classNames({ 'p-invalid': submitted && !vat_amount }) : ''} />
+                        <InputText  value={vat_amount} disabled={vat ? false : true} onChange={(e) =>setvat_amount(e.target.value)} required={vat ? true : false} className={vat ? classNames({ 'p-invalid': submitted && !vat_amount }) : ''} />
                         {submitted && !vat_amount && vat && <small className="p-invalid">{translate('Amount is required')}</small>}
                         
-                    </div>
+                    </div> */}
                     <div className="p-field p-col-1"></div>
                 </div>
                 <div className="p-fluid p-formgrid p-grid">
